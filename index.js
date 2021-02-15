@@ -37,9 +37,9 @@ client.on('message' , (message) =>
     let command = args[0].toLowerCase();
     console.log(command);
 
-    //args[0] = '';
-    //args = (args[1] + ' ' + args[2] + ' ' +args[3] + ' ' + args[4] + ' ' + args[5] + ' ' +args[6] + ' ' + args[7] + ' ' + args[8] + ' ' +args[9] + ' ' + args[10] + ' ' + args[11] + ' ' +args[12] + ' ' + args[13]).toString();
-    //console.log(args);
+    args[0] = '';
+    args = args.join(' ').trim();
+    console.log(args);
     
     /*
     let args = message.content.trim().slice(prefix.length).trim().split(" ", 20);
@@ -85,8 +85,8 @@ client.on('message' , (message) =>
             return message.channel.send('You need to join a voice channel first');
         }
         else{
-            args = message.content.trim().slice(prefix.length + command.length).trim().toString();
-            console.log(args);
+            //args = message.content.trim().slice(prefix.length + command.length).trim().toString();
+            //console.log(args);
 
             let result = await searcher.search(args, { type: "video" });
 
