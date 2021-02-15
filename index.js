@@ -159,12 +159,17 @@ client.on('message' , (message) =>
     }
 
     function stop(message, serverQueue){
+        
         if(!message.member.voice.channel){
             return message.channel.send('Primero metete a un canal de voz, cabezón');
         }
-        serverQueue.songs = [];
+        if(!serverQueue){
+            return message.channel.send('No hay nada en reproducción');
+        }else{
+            serverQueue.songs = [];
         serverQueue.connection.dispatcher.end();
         message.channel.send('Hasta la próxima!');
+        }
     }
 
     function skip (message, serverQueue){
