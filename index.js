@@ -33,12 +33,14 @@ client.on('message' , (message) =>
 
     const serverQueue = queue.get(message.guild.id);
 
-    let args = message.content.slice(prefix.length).trim().split(" ", 20);
+    let args = message.content.trim().slice(prefix.length).trim().split(" ", 20);
     console.log(args);
-
+    
     let command = args[0].toLowerCase();
     console.log(command);
 
+    args.shift();
+    console.log(args);
 
     switch(command){
 
@@ -97,9 +99,6 @@ client.on('message' , (message) =>
             return message.channel.send('Primero metete a un canal de voz, cabezón');
         }
         else{
-            args = message.content.slice(prefix.length + command.length).trim().toString();
-            console.log(args);
-
             let result = await searcher.search(args, { type: "video" });
 
             //message.channel.send(result.first.url)
@@ -167,8 +166,8 @@ client.on('message' , (message) =>
             return message.channel.send('No hay nada en reproducción');
         }else{
             serverQueue.songs = [];
-        serverQueue.connection.dispatcher.end();
-        message.channel.send('Hasta la próxima!');
+            serverQueue.connection.dispatcher.end();
+            message.channel.send('Hasta la próxima!');
         }
     }
 
@@ -210,7 +209,7 @@ client.on('message' , (message) =>
             if(!serverQueue.connection){
                 return message.channel.send('No hay nada en reproducción');
             }else{
-                if(serverQueue.connection.dispatcher.resumed){
+                if(serverQueue.connection.dispatcher.playing){
                     return message.channel.send('La cacnción ya se está reproduciendo');
                 }else{
                     serverQueue.connection.dispatcher.resume();
