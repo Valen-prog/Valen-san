@@ -155,6 +155,7 @@ client.on('message' , (message) =>
             return message.channel.send('There is nothing playing');
         }else{
             serverQueue.songs = [];
+            serverQueue.connection.dispatcher.resume(); //this is only here to prevent a glitch
             serverQueue.connection.dispatcher.end();
             message.channel.send('Succesfully disconnected');
         }
