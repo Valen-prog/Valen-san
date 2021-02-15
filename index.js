@@ -31,7 +31,7 @@ client.on('message' , (message) =>
 
     const serverQueue = queue.get(message.guild.id);
 
-    let args = message.content.trim().slice(prefix.length).trim().split(" ", 20);
+    let args = message.content.trim().slice(prefix.length).trim().split(" ");
     console.log(args);
 
     let command = args[0].toLowerCase();
