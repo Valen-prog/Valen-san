@@ -179,17 +179,23 @@ client.on('message' , (message) =>
     }
 
     function pause(serverQueue){
-        if(!serverQueue.connection){
+        if(!serverQueue){
             return message.channel.send('No hay nada en reproducción');
+        }else{
+            if(!serverQueue.connection){
+                return message.channel.send('No hay nada en reproducción');
+            }else{
+                if(serverQueue.connection.dispatcher.paused){
+                    return message.channel.send('Ya está pausada');
+                }else{
+                    serverQueue.connection.dispatcher.pause();
+                    message.channel.send('Se ha pausado la cacnción')
+                }
+            }
         }
         if(!message.member.voice.channel){
             return message.channel.send('No estás en un canal de voz');
         }
-        if(serverQueue.connection.dispatcher.paused){
-            return message.channel.send('Ya está pausada');
-        }
-        serverQueue.connection.dispatcher.pause();
-        message.channel.send('Se ha pausado la cacnción')
     }
 
     function resume(serverQueue){
