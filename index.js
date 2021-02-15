@@ -1,7 +1,5 @@
 const {excecutionAsyncResource} = require('async_hooks');
 
-
-
 const Discord = require('discord.js');
 
 const client = new Discord.Client();
@@ -35,13 +33,24 @@ client.on('message' , (message) =>
 
     let args = message.content.trim().slice(prefix.length).trim().split(" ", 20);
     console.log(args);
+
+    let command = args[0].toLowerCase();
+    console.log(command);
+
+    args[0] = '';
+    args.toString();
+    console.log(args);
+
+    /*let args = message.content.trim().slice(prefix.length).trim().split(" ", 20);
+    console.log(args);
     
     let command = args[0].toLowerCase();
     console.log(command);
 
     args.shift();
-    args.toString();
+    args.toString()
     console.log(args);
+    */
 
     switch(command){
 
@@ -81,7 +90,7 @@ client.on('message' , (message) =>
         const VC = message.member.voice.channel;
         
         if(!VC){
-            message.channel.send('Primero metete a un canal de voz, cabezón');
+            message.channel.send('You need to join a voice channel first');
         }
         else{
             try{
@@ -97,9 +106,12 @@ client.on('message' , (message) =>
         let VC = message.member.voice.channel;
 
         if(!VC){
-            return message.channel.send('Primero metete a un canal de voz, cabezón');
+            return message.channel.send('You need to join a voice channel first');
         }
         else{
+            //args = message.content.slice(prefix.length + command.length).trim().toString();
+            //console.log(args);
+
             let result = await searcher.search(args, { type: "video" });
 
             //message.channel.send(result.first.url)
@@ -132,11 +144,11 @@ client.on('message' , (message) =>
                 }catch(err){
                     console.error(err);
                     queue.delete(message.guild.id);
-                    return message.channel.send(`No puedo conectarme ${err}`)
+                    return message.channel.send(`I cannot connect ${err}`)
                 }
             }else{
                 serverQueue.songs.push(song);
-                return message.channel.send(`Se ha añadido a la lista ${song.url}`);
+                return message.channel.send(`Has been added to queue ${song.url}`);
             }
         }
     }
@@ -155,29 +167,29 @@ client.on('message' , (message) =>
             play(guild, serverQueue.songs[0])
             
             })
-        serverQueue.txtChannel.send(`Se está reproduciendo ${serverQueue.songs[0].url}`)
+        serverQueue.txtChannel.send(`Is being played ${serverQueue.songs[0].url}`)
     }
 
     function stop(message, serverQueue){
         
         if(!message.member.voice.channel){
-            return message.channel.send('Primero metete a un canal de voz, cabezón');
+            return message.channel.send('You need to join a voice channel first');
         }
         if(!serverQueue){
-            return message.channel.send('No hay nada en reproducción');
+            return message.channel.send('There is nothing playing');
         }else{
             serverQueue.songs = [];
             serverQueue.connection.dispatcher.end();
-            message.channel.send('Hasta la próxima!');
+            message.channel.send('Succesfully disconnected');
         }
     }
 
     function skip (message, serverQueue){
         if(!message.member.voice.channel){
-            return message.channel.send('Primero metete a un canal de voz, cabezón');
+            return message.channel.send('You need to join a voice channel first');
         }
         if(!serverQueue){
-            return message.channel.send('No hay nada que reproducir');
+            return message.channel.send('There is nothing to play');
         }
         serverQueue.connection.dispatcher.end();
         
@@ -185,41 +197,41 @@ client.on('message' , (message) =>
 
     function pause(serverQueue){
         if(!serverQueue){
-            return message.channel.send('No hay nada en reproducción');
+            return message.channel.send('There is nothing playing');
         }else{
             if(!serverQueue.connection){
-                return message.channel.send('No hay nada en reproducción');
+                return message.channel.send('There is nothing playing');
             }else{
                 if(serverQueue.connection.dispatcher.paused){
-                    return message.channel.send('Ya está pausada');
+                    return message.channel.send('The song is already paused');
                 }else{
                     serverQueue.connection.dispatcher.pause();
-                    message.channel.send('Se ha pausado la cacnción')
+                    message.channel.send('The song has been paused')
                 }
             }
         }
         if(!message.member.voice.channel){
-            return message.channel.send('No estás en un canal de voz');
+            return message.channel.send('You need to join a voice channel first');
         }
     }
 
     function resume(serverQueue){
         if(!serverQueue){
-            return message.channel.send('No hay nada en reproducción');
+            return message.channel.send('There is nothing to play');
         }else{
             if(!serverQueue.connection){
-                return message.channel.send('No hay nada en reproducción');
+                return message.channel.send('There is nothing to play');
             }else{
                 if(serverQueue.connection.dispatcher.playing){
-                    return message.channel.send('La cacnción ya se está reproduciendo');
+                    return message.channel.send('The song is already playing');
                 }else{
                     serverQueue.connection.dispatcher.resume();
-                    message.channel.send('Se ha resumido la canción')
+                    message.channel.send('Song has been resumed')
                 }
             }
         }
         if(!message.member.voice.channel){
-            return message.channel.send('No estás en un canal de voz');
+            return message.channel.send('You need to join a voice channel first');
         }
     }
 
