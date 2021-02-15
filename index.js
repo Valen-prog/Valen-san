@@ -40,6 +40,7 @@ client.on('message' , (message) =>
     console.log(command);
 
     args.shift();
+    args.toString();
     console.log(args);
 
     switch(command){
