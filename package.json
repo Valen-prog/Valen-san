@@ -1,0 +1,19 @@
+{
+  "name": "valen-san",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "check-node-version": "^4.1.0",
+    "discord.js": "^12.5.1",
+    "ffmpeg-static": "^4.2.7",
+    "opusscript": "^0.0.7",
+    "ytdl-core": "^4.4.5",
+    "ytsearcher": "^1.2.3"
+  },
+  "description": ""
+}

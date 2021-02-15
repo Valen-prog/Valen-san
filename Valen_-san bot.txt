@@ -1,0 +1,12 @@
+"npm init" to create package file for discord bot.
+"node ." to run the code
+"npm install discord.js --save" to install discord library
+key = 53b1f3bfea833ceaa717c6bb2d4a9ac71e2e6ac07d823bbf4710ca122a264ed6
+client secret = H3kv0812DOw_is5ca0y7-nn4CIPOeN8p
+client ID = 800431285025767484
+permissons integer = 8
+token = ODAwNDMxMjg1MDI1NzY3NDg0.YASBuQ.0EZlP8ew12hXGPawO61E8aUuJcw
+Link-Bot = https://discord.com/oauth2/authorize?client_id=800431285025767484&scope=bot&permissions=2147483647
+
+
+Averiguar como resolver el porque el .join() y .leave() no funcionan
