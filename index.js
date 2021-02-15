@@ -85,7 +85,7 @@ client.on('message' , (message) =>
             return message.channel.send('You need to join a voice channel first');
         }
         else{
-            args = message.content.slice(prefix.length + command.length).trim().toString();
+            args = message.content.trim().slice(prefix.length + command.length).trim().toString();
             console.log(args);
 
             let result = await searcher.search(args, { type: "video" });
