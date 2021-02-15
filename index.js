@@ -58,7 +58,7 @@ client.on('message' , (message) =>
             join();
             break;
         case '8ball':
-            ball();
+            //ball();
             break;
         case 'pause':
             pause(serverQueue);
@@ -199,22 +199,27 @@ client.on('message' , (message) =>
     }
 
     function resume(serverQueue){
-        if(!serverQueue.connection){
+        if(!serverQueue){
             return message.channel.send('No hay nada en reproducción');
+        }else{
+            if(!serverQueue.connection){
+                return message.channel.send('No hay nada en reproducción');
+            }else{
+                if(serverQueue.connection.dispatcher.resumed){
+                    return message.channel.send('La cacnción ya se está reproduciendo');
+                }else{
+                    serverQueue.connection.dispatcher.resume();
+                    message.channel.send('Se ha resumido la canción')
+                }
+            }
         }
         if(!message.member.voice.channel){
             return message.channel.send('No estás en un canal de voz');
         }
-        if(serverQueue.connection.dispatcher.resumed){
-            return message.channel.send('La cacnción ya se está reproduciendo');
-        }
-        serverQueue.connection.dispatcher.resume();
-        message.channel.send('Se ha resumido la canción')
     }
 
     function ball(){
-        let value = new Int32Array(1);
-        window.crypto.getRandomValues(value);
+        var random = Math.random()
         
 
           //message.reply('Have you seen JoJo?'); this will print an @ to the user as well as the message
