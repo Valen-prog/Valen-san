@@ -87,44 +87,49 @@ client.on('message' , (message) =>
         else{
             //args = message.content.trim().slice(prefix.length + command.length).trim().toString();
             //console.log(args);
+            if(!args.length){
+                return message.channel.send('You need to enter a parameter');
+            }
 
             let result = await searcher.search(args, { type: "video" });
 
-            //message.channel.send(result.first.url)
-
-            const songInfo = await ytdl.getInfo(result.first.url);
-
-            let song = {
-                title: songInfo.videoDetails.title,
-                url: songInfo.videoDetails.video_url,
-                duration : songInfo.videoDetails.duration
-            };
-
-            if(!serverQueue){
-                const queueConstructor = {
-                    txtChannel: message.channel,
-                    vChannel: VC,
-                    connection: null,
-                    songs: [],
-                    volume: 10,
-                    playing: true
-                };
-                queue.set(message.guild.id, queueConstructor);
-                
-                queueConstructor.songs.push(song);
-
-                try{
-                    let connection = await VC.join();
-                    queueConstructor.connection = connection;
-                    play(message.guild, queueConstructor.songs[0]);
-                }catch(err){
-                    console.error(err);
-                    queue.delete(message.guild.id);
-                    return message.channel.send(`I cannot connect ${err}`)
-                }
+            if(!result){
+                return message.channel.send('Could not find the song');
             }else{
-                serverQueue.songs.push(song);
-                return message.channel.send(`Has been added to queue ${song.url}`);
+                const songInfo = await ytdl.getInfo(result.first.url);
+
+                let song = {
+                    title: songInfo.videoDetails.title,
+                    url: songInfo.videoDetails.video_url,
+                    duration: songInfo.videoDetails.duration
+                };
+
+                if(!serverQueue){
+                    const queueConstructor = {
+                        txtChannel: message.channel,
+                        vChannel: VC,
+                        connection: null,
+                        songs: [],
+                        volume: 10,
+                        playing: true
+                    };
+                    queue.set(message.guild.id, queueConstructor);
+                
+                    queueConstructor.songs.push(song);
+
+                    try{
+                        let connection = await VC.join();
+                        queueConstructor.connection = connection;
+                        play(message.guild, queueConstructor.songs[0]);
+                    }catch(err){
+                        console.error(err);
+                        queue.delete(message.guild.id);
+                        return message.channel.send(`I cannot connect ${err}`)
+                    }
+                }else{
+                    serverQueue.songs.push(song);
+                    return message.channel.send(`${song.title} has been added to queue 👍`);
+                }
             }
         }
     }
@@ -157,7 +162,7 @@ client.on('message' , (message) =>
             serverQueue.songs = [];
             if(serverQueue.connection){
                 serverQueue.connection.dispatcher.end();
-                message.channel.send('Succesfully disconnected');
+                message.channel.send('👋 Succesfully disconnected');
             }
         }
     }
