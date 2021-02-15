@@ -31,7 +31,7 @@ client.on('message' , (message) =>
 
     const serverQueue = queue.get(message.guild.id);
 
-    let args = message.content.trim().slice(prefix.length).trim().split(" ", 20);
+    /*let args = message.content.trim().slice(prefix.length).trim().split(" ", 20);
     console.log(args);
 
     let command = args[0].toLowerCase();
@@ -40,8 +40,9 @@ client.on('message' , (message) =>
     args[0] = '';
     args.toString();
     console.log(args);
+    */
 
-    /*let args = message.content.trim().slice(prefix.length).trim().split(" ", 20);
+    let args = message.content.trim().slice(prefix.length).trim().split(" ", 20);
     console.log(args);
     
     let command = args[0].toLowerCase();
@@ -50,7 +51,7 @@ client.on('message' , (message) =>
     args.shift();
     args.toString()
     console.log(args);
-    */
+    
 
     switch(command){
 
@@ -64,10 +65,6 @@ client.on('message' , (message) =>
             skip(message, serverQueue);
             break;
         case 'leave':
-            leave();
-            break;
-        case 'join':
-            join();
             break;
         case '8ball':
             //ball();
@@ -81,27 +78,6 @@ client.on('message' , (message) =>
         default: return;
     }
 
-    function leave(){
-        const VC = message.member.voice.channel;
-        VC.leave();
-    }
-    
-    function join(){
-        const VC = message.member.voice.channel;
-        
-        if(!VC){
-            message.channel.send('You need to join a voice channel first');
-        }
-        else{
-            try{
-                //let connection = await VC.join();
-                //VC.join();
-            }catch(err){
-
-            }
-        }
-    }
-
     async function execute(message, serverQueue){
         let VC = message.member.voice.channel;
 
@@ -109,8 +85,8 @@ client.on('message' , (message) =>
             return message.channel.send('You need to join a voice channel first');
         }
         else{
-            //args = message.content.slice(prefix.length + command.length).trim().toString();
-            //console.log(args);
+            args = message.content.slice(prefix.length + command.length).trim().toString();
+            console.log(args);
 
             let result = await searcher.search(args, { type: "video" });
 
