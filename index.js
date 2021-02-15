@@ -11,13 +11,13 @@ const ytdl = require('ytdl-core');
 const {YTSearcher} = require('ytsearcher');
 
 const searcher = new YTSearcher({
-    key: "AIzaSyDlSP4ApIFQvxPWw22fZICGa3FMr7HnB08",
+    key: process.env.youtube_api,
     revealed: true
 });
 
 const prefix = 'v!';
 
-var myToken = "ODAwNDMxMjg1MDI1NzY3NDg0.YASBuQ.0EZlP8ew12hXGPawO61E8aUuJcw";
+var myToken = process.env.token;
 
 client.login(myToken);
 
