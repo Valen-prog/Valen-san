@@ -31,17 +31,17 @@ client.on('message' , (message) =>
 
     const serverQueue = queue.get(message.guild.id);
 
-    /*let args = message.content.trim().slice(prefix.length).trim().split(" ", 20);
+    let args = message.content.trim().slice(prefix.length).trim().split(" ", 20);
     console.log(args);
 
     let command = args[0].toLowerCase();
     console.log(command);
 
     args[0] = '';
-    args.toString();
+    args = args.toString();
     console.log(args);
-    */
-
+    
+    /*
     let args = message.content.trim().slice(prefix.length).trim().split(" ", 20);
     console.log(args);
     
@@ -51,7 +51,7 @@ client.on('message' , (message) =>
     args.shift();
     args.toString()
     console.log(args);
-    
+    */
 
     switch(command){
 
@@ -85,8 +85,8 @@ client.on('message' , (message) =>
             return message.channel.send('You need to join a voice channel first');
         }
         else{
-            args = message.content.trim().slice(prefix.length + command.length).trim().toString();
-            console.log(args);
+            //args = message.content.trim().slice(prefix.length + command.length).trim().toString();
+            //console.log(args);
 
             let result = await searcher.search(args, { type: "video" });
 
