@@ -175,7 +175,10 @@ client.on('message' , (message) =>
             return message.channel.send('There is nothing to play');
         }
         serverQueue.connection.dispatcher.end();
-        
+        if(serverQueue.connection){
+            serverQueue.connection.dispatcher.end();
+            return message.channel.send('There are no more songs in the queue')
+        }
     }
 
     function pause(serverQueue){
