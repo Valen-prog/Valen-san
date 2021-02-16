@@ -8,5 +8,6 @@ permissons integer = 8
 token = ODAwNDMxMjg1MDI1NzY3NDg0.YASBuQ.0EZlP8ew12hXGPawO61E8aUuJcw
 Link-Bot = https://discord.com/oauth2/authorize?client_id=800431285025767484&scope=bot&permissions=2147483647
 
+892736060444-l9vtqd9pe48t2g7top88l9be46nrcsjt.apps.googleusercontent.com
 
-Averiguar como resolver el porque el .join() y .leave() no funcionan
+Z9D8R8RO1F2MgMQofxMbXC6y

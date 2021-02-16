@@ -75,6 +75,9 @@ client.on('message' , (message) =>
         case 'resume':
             resume(serverQueue);
             break;
+        case 'help':
+            help();
+        break;
         default: return;
     }
 
@@ -153,9 +156,7 @@ client.on('message' , (message) =>
 
     function stop(message, serverQueue){
         
-        if(!message.member.voice.channel){
-            return message.channel.send('You need to join a voice channel first');
-        }
+
         if(!serverQueue){
             return message.channel.send('There is nothing playing');
         }else{
@@ -164,6 +165,9 @@ client.on('message' , (message) =>
                 serverQueue.connection.dispatcher.end();
                 message.channel.send('👋 Succesfully disconnected');
             }
+        }
+        if(!message.member.voice.channel){
+            return message.channel.send('You need to join a voice channel first');
         }
     }
 
@@ -229,27 +233,56 @@ client.on('message' , (message) =>
         switch(random){
             case 1:message.channel.send('No');
                 break;
-            case 2:message.channel.send('Sí');
+            case 2:message.channel.send('Yes');
                 break;
-            case 3:message.channel.send('Talvez');
+            case 3:message.channel.send('Is possible');
                 break;
-            case 4:message.channel.send('Probablemente');
+            case 4:message.channel.send('Probably');
                 break;
-            case 5:message.channel.send('No lo creo');
+            case 5:message.channel.send('I believe not');
                 break;
-            case 6:message.channel.send('Definitivamente');
+            case 6:message.channel.send('Definitely');
                 break;
-            case 7:message.channel.send('No lo sé');
+            case 7:message.channel.send('I dunno');
                 break;
-            case 8:message.channel.send('Definitivamente no');
+            case 8:message.channel.send('Definitely not');
                 break;
-            case 9:message.channel.send('No cuentes con ello');
+            case 9:message.channel.send('Do not count on it');
                 break;
-            case 10:message.channel.send('Quizas');
+            case 10:message.channel.send('Maybe');
+                break;
+            case 11:message.channel.send('The odds are in favor');
+                break;
+            case 12:message.channel.send('The odds are against you');
+                break;
+            case 13:message.channel.send('I do not think so');
+                break;
+            case 14:message.channel.send('I would say no');
+                break;
+            case 15:message.channel.send('Try Again');
+                break;
+            case 16:message.channel.send('It is certain');
+                break;
+            case 17:message.channel.send('My sources say no');
+                break;
+            case 18:message.channel.send('Outlook not so good');
+                break;
+            case 19:message.channel.send('Signs point to yes');
+                break;
+            case 20:message.channel.send('It is decidedly so');
+                break;
+            case 21:message.channel.send('Stars say yes');
                 break;
         }
     }
     
-        
+    function help(){
+        const embed = new Discord.RichEmbed()
+    .setTitle(`HELP`)
+    .setColor(0xCF40FA)
+    .setDescription(`List of commands below.`)
+    .addField(`**Commands**`, `play - Reproduces the song specified (name or URL)\n stop - Disconnects the bot and resets queue\n skip - Skips to the next song in queue\n pause - Pauses the playing song \n resume - Resumes pauses\n`)
+    message.channel.send({ embed: embed });
+    }
 }
 );
