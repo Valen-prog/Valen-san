@@ -277,11 +277,11 @@ client.on('message' , (message) =>
     }
     
     function help(){
-        const embed = new Discord.RichEmbed()
+        const embed = new Discord.MessageEmbed()
     .setTitle(`HELP`)
     .setColor(0xCF40FA)
     .setDescription(`List of commands below.`)
-    .addField(`**Commands**`, `play - Reproduces the song specified (name or URL)\n stop - Disconnects the bot and resets queue\n skip - Skips to the next song in queue\n pause - Pauses the playing song \n resume - Resumes pauses\n`)
+    .addField(`**Commands**`, `play - Reproduces the song specified (name or URL)\n stop - Disconnects the bot and resets queue\n skip - Skips to the next song in queue\n pause - Pauses the playing song \n resume - Resumes pauses\n`, true)
     message.channel.send({ embed: embed });
     }
 }
