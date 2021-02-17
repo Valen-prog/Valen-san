@@ -181,37 +181,49 @@ client.on('message' , (message) =>
         }
         if(!serverQueue){
             return message.channel.send('There are no songs in queue 😔');
-        }
-        
-        serverQueue.connection.dispatcher.end();
-        message.channel.send('Song skipped ✌');
-
-        if(!serverQueue.connection){
-            message.channel.send('There are no more songs in the queue');
-        }
-    }
-
-    function pause(message, serverQueue){
-        if(!serverQueue){
-            return message.channel.send('There is nothing playing');
         }else{
             if(!serverQueue.connection){
-                return message.channel.send('There is nothing playing');
+                message.channel.send('There are no more songs in the queue');
             }else{
-                if(serverQueue.connection.dispatcher.paused){
-                    return message.channel.send('The song is already paused');
+                if(serverQueue.connection.dispatcher){
+                    serverQueue.connection.dispatcher.end();
+                    message.channel.send('Song skipped ✌');
                 }else{
-                    serverQueue.connection.dispatcher.pause();
-                    message.channel.send('The song has been paused')
+                    return message.channel.send('No song is being played');
                 }
             }
         }
+        
+    }
+
+    function pause(message, serverQueue){
         if(!message.member.voice.channel){
             return message.channel.send('You need to join a voice channel first');
+        }
+        if(!serverQueue){
+            return message.channel.send('No song is being played');
+        }else{
+            if(!serverQueue.connection){
+                return message.channel.send('No song is being played');
+            }else{
+                if(serverQueue.connection.dispatcher){
+                    if(serverQueue.connection.dispatcher.paused){
+                        return message.channel.send('The song is already paused');
+                    }else{
+                        serverQueue.connection.dispatcher.pause();
+                        return message.channel.send('The song has been paused')
+                    }
+                }else{
+                    return message.channel.send('No song is being played');
+                }
+            }
         }
     }
 
     function resume(message, serverQueue){
+        if(!message.member.voice.channel){
+            return message.channel.send('You need to join a voice channel first');
+        }
         if(!serverQueue){
             return message.channel.send('There is nothing to play');
         }else{
@@ -229,9 +241,6 @@ client.on('message' , (message) =>
                     return message.channel.send('There is nothing to play');
                 }
             }
-        }
-        if(!message.member.voice.channel){
-            return message.channel.send('You need to join a voice channel first');
         }
     }
 
