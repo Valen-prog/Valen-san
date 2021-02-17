@@ -70,10 +70,10 @@ client.on('message' , (message) =>
             //ball();
             break;
         case 'pause':
-            pause(serverQueue);
+            pause(message, serverQueue);
             break;
         case 'resume':
-            resume(serverQueue);
+            resume(message, serverQueue);
             break;
         case 'help':
             help();
@@ -151,7 +151,7 @@ client.on('message' , (message) =>
             play(guild, serverQueue.songs[0])
             
             })
-        serverQueue.txtChannel.send(`${serverQueue.songs[0].title} is being played \n Duration: ${serverQueue.songs[0].duration} \n Link: ${serverQueue.songs[0].url}`)
+        serverQueue.txtChannel.send(`**${serverQueue.songs[0].title}** is being played! 🤩`)
     }
 
     function stop(message, serverQueue){
@@ -192,7 +192,7 @@ client.on('message' , (message) =>
         }
     }
 
-    function pause(serverQueue){
+    function pause(message, serverQueue){
         if(!serverQueue){
             return message.channel.send('There is nothing playing');
         }else{
@@ -212,7 +212,7 @@ client.on('message' , (message) =>
         }
     }
 
-    function resume(serverQueue){
+    function resume(message, serverQueue){
         if(!serverQueue){
             return message.channel.send('There is nothing to play');
         }else{
@@ -283,6 +283,25 @@ client.on('message' , (message) =>
         }
     }
     
+    function song(message, serverQueue){
+        if(!serverQueue){
+            return message.channel.send('No song is being played');
+        }
+        if(!serverQueue.connection){
+            return message.channel.send('No song is being played');
+        }else{
+            if(serverQueue.connection.dispatcher.playing || serverQueue.connection.dispatcher.paused){
+
+                const embed = new Discord.MessageEmbed()
+                .setColor(0xCF40FA)
+                .setDescription(`Current's song information below.`)
+                .addField(`🎶🎵**Song**🎶🎵`, `Current song: **${serverQueue.songs[0].title}** \n url: ${serverQueue.songs[0].url}`, true)
+
+                return message.channel.send({ embed: embed });
+            }
+        }
+    }
+
     function help(){
         const embed = new Discord.MessageEmbed()
     .setTitle(`HELP`)
