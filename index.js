@@ -144,8 +144,12 @@ client.on('message' , (message) =>
                             return message.channel.send(`I cannot connect ${err}`)
                         }
                     }else{
-                        message.channel.send(`${song.title} has been added to queue 👍`);
+                        let connection = await VC.join();
+                        if(serverQueue.connection == connection){
+                            serverQueue.connection = connection;
+                        }
                         if(serverQueue.connection.dispatcher){
+                            
                             if(!serverQueue.connection.dispatcher.playing){
                                 serverQueue.connection.dispatcher.resume();
                                 return message.channel.send(`**${serverQueue.songs[0].title}** is being played! 🤩`);
@@ -153,6 +157,7 @@ client.on('message' , (message) =>
                         }else{
                             try{
                                 play(message.guild, serverQueue.songs[0]);
+                                message.channel.send(`${song.title} has been added to queue 👍`);
                             }catch(err){
                                 console.error(err);
                                 queue.delete(message.guild.id);
