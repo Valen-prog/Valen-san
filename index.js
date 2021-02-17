@@ -160,6 +160,9 @@ client.on('message' , (message) =>
         if(!serverQueue){
             return message.channel.send('There is nothing playing');
         }else{
+            if(serverQueue.connection.dispatcher.paused){
+                serverQueue.connection.dispatcher.resume();
+            }
             serverQueue.songs = [];
             if(serverQueue.connection){
                 serverQueue.connection.dispatcher.end();
@@ -178,10 +181,13 @@ client.on('message' , (message) =>
         if(!serverQueue){
             return message.channel.send('There is nothing to play');
         }
-        serverQueue.connection.dispatcher.end();
         if(serverQueue.connection){
+            
+            if(serverQueue.songs = []){
+                serverQueue.connection.dispatcher.end();
+                return message.channel.send('There are no more songs in the queue')
+            }
             serverQueue.connection.dispatcher.end();
-            return message.channel.send('There are no more songs in the queue')
         }
     }
 
