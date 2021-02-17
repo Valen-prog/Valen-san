@@ -67,7 +67,7 @@ client.on('message' , (message) =>
         case 'leave':
             break;
         case '8ball':
-            //ball();
+            ball();
             break;
         case 'pause':
             pause(message, serverQueue);
@@ -77,7 +77,10 @@ client.on('message' , (message) =>
             break;
         case 'help':
             help();
-        break;
+            break;
+        case 'song':
+            song(message, serverQueue);
+            break;
         default: return;
     }
 
@@ -232,29 +235,48 @@ client.on('message' , (message) =>
         }
     }
 
+    function song(message, serverQueue){
+        if(!serverQueue){
+            return message.channel.send('No song is being played');
+        }
+        if(!serverQueue.connection){
+            return message.channel.send('No song is being played');
+        }else{
+            if(serverQueue.connection.dispatcher.playing || serverQueue.connection.dispatcher.paused){
+
+                const embed = new Discord.MessageEmbed()
+                .setColor(0xCF40FA)
+                .setDescription(`Current's song information below.`)
+                .addField(`🎶🎵**Song**🎶🎵`, `Current song: **${serverQueue.songs[0].title}** \n url: ${serverQueue.songs[0].url}`, true)
+
+                return message.channel.send({ embed: embed });
+            }
+        }
+    }
+
     function ball(){
-        var random = Math.random()
+        var random = randomNum(1, 21);
         
 
           //message.reply('Have you seen JoJo?'); this will print an @ to the user as well as the message
         switch(random){
-            case 1:message.channel.send('No');
+            case 1: message.channel.send('No');
                 break;
-            case 2:message.channel.send('Yes');
+            case 2: message.channel.send('Yes');
                 break;
-            case 3:message.channel.send('Is possible');
+            case 3: message.channel.send('Is possible');
                 break;
-            case 4:message.channel.send('Probably');
+            case 4: message.channel.send('Probably');
                 break;
-            case 5:message.channel.send('I believe not');
+            case 5: message.channel.send('I believe not');
                 break;
-            case 6:message.channel.send('Definitely');
+            case 6: message.channel.send('Definitely');
                 break;
-            case 7:message.channel.send('I dunno');
+            case 7: message.channel.send('I dunno');
                 break;
-            case 8:message.channel.send('Definitely not');
+            case 8: message.channel.send('Definitely not');
                 break;
-            case 9:message.channel.send('Do not count on it');
+            case 9: message.channel.send('Do not count on it');
                 break;
             case 10:message.channel.send('Maybe');
                 break;
@@ -282,24 +304,9 @@ client.on('message' , (message) =>
                 break;
         }
     }
-    
-    function song(message, serverQueue){
-        if(!serverQueue){
-            return message.channel.send('No song is being played');
-        }
-        if(!serverQueue.connection){
-            return message.channel.send('No song is being played');
-        }else{
-            if(serverQueue.connection.dispatcher.playing || serverQueue.connection.dispatcher.paused){
 
-                const embed = new Discord.MessageEmbed()
-                .setColor(0xCF40FA)
-                .setDescription(`Current's song information below.`)
-                .addField(`🎶🎵**Song**🎶🎵`, `Current song: **${serverQueue.songs[0].title}** \n url: ${serverQueue.songs[0].url}`, true)
-
-                return message.channel.send({ embed: embed });
-            }
-        }
+    function randomNum(min, max){
+        Math.floor(Math.random() * (max - min + 1) + min);
     }
 
     function help(){
@@ -307,7 +314,7 @@ client.on('message' , (message) =>
     .setTitle(`HELP`)
     .setColor(0xCF40FA)
     .setDescription(`List of commands below.`)
-    .addField(`**Commands**`, `play - Reproduces the song specified (name or URL)\n stop - Disconnects the bot and resets queue\n skip - Skips to the next song in queue\n pause - Pauses the playing song \n resume - Resumes pauses\n`, true)
+    .addField(`**Commands**`, `play   - Reproduces the song specified (name or URL)\n stop   - Disconnects the bot and resets queue\n skip   - Skips to the next song in queue\n pause  - Pauses the playing song \n resume - Resumes pauses\n song   - Gives current song's info \n 8ball  - Gives answers to your questions`, true)
     message.channel.send({ embed: embed });
     }
 }
