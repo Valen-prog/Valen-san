@@ -161,13 +161,12 @@ client.on('message' , (message) =>
             return message.channel.send('There is nothing playing');
         }else{
             if(serverQueue.connection){
-                if(serverQueue.connection.dispatcher.paused){
-                    serverQueue.connection.dispatcher.resume();
-                }
                 serverQueue.songs = [];
+                
+                serverQueue.connection.dispatcher.end();
+                message.channel.send('👋 Succesfully disconnected');
                 if(serverQueue.connection){
-                    serverQueue.connection.dispatcher.end();
-                    message.channel.send('👋 Succesfully disconnected');
+                    serverQueue.vChannel.leave();
                 }
             }
         }
