@@ -243,13 +243,7 @@ client.on('message' , (message) =>
             return message.channel.send('No song is being played');
         }else{
             if(serverQueue.connection.dispatcher.playing || serverQueue.connection.dispatcher.paused){
-
-                const embed = new Discord.MessageEmbed()
-                .setColor(0xCF40FA)
-                .setDescription(`Current's song information below.`)
-                .addField(`🎶🎵**Song**🎶🎵`, `Current song: **${serverQueue.songs[0].title}** \n url: ${serverQueue.songs[0].url}`, true)
-
-                return message.channel.send({ embed: embed });
+                return message.channel.send(`🎶🎵**SONG**🎶🎵 \n Current song: **${serverQueue.songs[0].title}** \n url: ${serverQueue.songs[0].url}`);
             }
         }
     }
@@ -306,7 +300,7 @@ client.on('message' , (message) =>
     }
 
     function randomNum(min, max){
-        Math.floor(Math.random() * (max - min + 1) + min);
+        return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
     function help(){
