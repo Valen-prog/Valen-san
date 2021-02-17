@@ -151,7 +151,7 @@ client.on('message' , (message) =>
             play(guild, serverQueue.songs[0])
             
             })
-        serverQueue.txtChannel.send(`Is being played ${serverQueue.songs[0].url}`)
+        serverQueue.txtChannel.send(`${serverQueue.songs[0].title} is being played \n Duration: ${serverQueue.songs[0].duration} \n Link: ${serverQueue.songs[0].url}`)
     }
 
     function stop(message, serverQueue){
@@ -160,13 +160,15 @@ client.on('message' , (message) =>
         if(!serverQueue){
             return message.channel.send('There is nothing playing');
         }else{
-            if(serverQueue.connection.dispatcher.paused){
-                serverQueue.connection.dispatcher.resume();
-            }
-            serverQueue.songs = [];
             if(serverQueue.connection){
-                serverQueue.connection.dispatcher.end();
-                message.channel.send('👋 Succesfully disconnected');
+                if(serverQueue.connection.dispatcher.paused){
+                    serverQueue.connection.dispatcher.resume();
+                }
+                serverQueue.songs = [];
+                if(serverQueue.connection){
+                    serverQueue.connection.dispatcher.end();
+                    message.channel.send('👋 Succesfully disconnected');
+                }
             }
         }
         if(!message.member.voice.channel){
@@ -179,15 +181,14 @@ client.on('message' , (message) =>
             return message.channel.send('You need to join a voice channel first');
         }
         if(!serverQueue){
-            return message.channel.send('There is nothing to play');
+            return message.channel.send('There are no songs in queue 😔');
         }
-        if(serverQueue.connection){
-            
-            if(serverQueue.songs = []){
-                serverQueue.connection.dispatcher.end();
-                return message.channel.send('There are no more songs in the queue')
-            }
-            serverQueue.connection.dispatcher.end();
+        
+        serverQueue.connection.dispatcher.end();
+        message.channel.send('Song skipped ✌');
+
+        if(!serverQueue.connection){
+            message.channel.send('There are no more songs in the queue');
         }
     }
 
