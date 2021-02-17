@@ -78,9 +78,6 @@ client.on('message' , (message) =>
         case 'help':
             help();
             break;
-        case 'song':
-            song(message, serverQueue, songInfo);
-            break;
         default: return;
     }
 
@@ -235,19 +232,6 @@ client.on('message' , (message) =>
         }
     }
 
-    function song(message, serverQueue, songInfo){
-        if(!serverQueue){
-            return message.channel.send('No song is being played');
-        }
-        if(!serverQueue.connection){
-            return message.channel.send('No song is being played');
-        }else{
-            if(serverQueue.connection.dispatcher.playing || serverQueue.connection.dispatcher.paused){
-                return message.channel.send(`🎶🎵**SONG**🎶🎵 \n Current song: **${songInfo.title}** \n url: ${songInfo.url}`);
-            }
-        }
-    }
-
     function ball(){
         var random = randomNum(1, 21);
         
@@ -308,7 +292,7 @@ client.on('message' , (message) =>
     .setTitle(`HELP`)
     .setColor(0xCF40FA)
     .setDescription(`List of commands below.`)
-    .addField(`**Commands**`, `play   - Reproduces the song specified (name or URL)\n stop   - Disconnects the bot and resets queue\n skip   - Skips to the next song in queue\n pause  - Pauses the playing song \n resume - Resumes pauses\n song   - Gives current song's info \n 8ball  - Gives answers to your questions`, true)
+    .addField(`**Commands**`, `play   - Reproduces the song specified (name or URL)\n stop   - Disconnects the bot and resets queue\n skip   - Skips to the next song in queue\n pause  - Pauses the playing song \n resume - Resumes pauses \n 8ball  - Gives answers to your questions`, true)
     message.channel.send({ embed: embed });
     }
 }
