@@ -218,11 +218,15 @@ client.on('message' , (message) =>
             if(!serverQueue.connection){
                 return message.channel.send('There is nothing to play');
             }else{
-                if(serverQueue.connection.dispatcher.playing){
-                    return message.channel.send('The song is already playing');
+                if(serverQueue.connection.dispatcher){
+                    if(serverQueue.connection.dispatcher.playing){
+                        return message.channel.send('The song is already playing');
+                    }else{
+                        serverQueue.connection.dispatcher.resume();
+                        return message.channel.send('Song has been resumed')
+                    }
                 }else{
-                    serverQueue.connection.dispatcher.resume();
-                    message.channel.send('Song has been resumed')
+                    return message.channel.send('There is nothing to play');
                 }
             }
         }
