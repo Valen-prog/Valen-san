@@ -182,7 +182,6 @@ client.on('message' , (message) =>
             .on('finish', () => {
             serverQueue.songs.shift();
             play(guild, serverQueue.songs[0])
-            })
             if(serverQueue.connection){
                 if(serverQueue.connection.dispatcher){
                     if(!serverQueue.connection.dispatcher.playing){
@@ -191,6 +190,8 @@ client.on('message' , (message) =>
                     }
                 }
             }
+            })
+            
         
     }
 
