@@ -145,7 +145,7 @@ client.on('message' , (message) =>
                         }
                     }else{
                         let connection = await VC.join();
-                        if(serverQueue.connection == connection){
+                        if(serverQueue.connection != connection){
                             serverQueue.connection = connection;
                         }
                         if(serverQueue.connection.dispatcher){
@@ -157,7 +157,7 @@ client.on('message' , (message) =>
                         }else{
                             try{
                                 play(message.guild, serverQueue.songs[0]);
-                                message.channel.send(`${song.title} has been added to queue 👍`);
+                                
                             }catch(err){
                                 console.error(err);
                                 queue.delete(message.guild.id);
@@ -182,9 +182,12 @@ client.on('message' , (message) =>
             .on('finish', () => {
             serverQueue.songs.shift();
             play(guild, serverQueue.songs[0])
-            
+            if(!serverQueue.connection.dispatcher.playing){
+                serverQueue.connection.dispatcher.end();
+                serverQueue.txtChannel.send(`**${serverQueue.songs[0].title}** is being played! 🤩`)
+            }
             })
-        serverQueue.txtChannel.send(`**${serverQueue.songs[0].title}** is being played! 🤩`)
+        
     }
 
     function stop(message, serverQueue){
