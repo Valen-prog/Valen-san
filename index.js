@@ -131,7 +131,34 @@ client.on('message' , (message) =>
                     }
                 }else{
                     serverQueue.songs.push(song);
-                    return message.channel.send(`${song.title} has been added to queue 👍`);
+                    message.channel.send(`${song.title} has been added to queue 👍`);
+
+                    if(!serverQueue.connection){
+                        try{
+                            let connection = await VC.join();
+                            queueConstructor.connection = connection;
+                            play(message.guild, queueConstructor.songs[0]);
+                        }catch(err){
+                            console.error(err);
+                            queue.delete(message.guild.id);
+                            return message.channel.send(`I cannot connect ${err}`)
+                        }
+                    }else{
+                        if(serverQueue.connection.dispatcher){
+                            if(!serverQueue.connection.dispatcher.playing){
+                                serverQueue.connection.dispatcher.resume();
+                                return message.channel.send(`**${serverQueue.songs[0].title}** is being played! 🤩`);
+                            }
+                        }else{
+                            try{
+                                play(message.guild, queueConstructor.songs[0]);
+                            }catch(err){
+                                console.error(err);
+                                queue.delete(message.guild.id);
+                                return message.channel.send(`I cannot connect ${err}`)
+                            }
+                        }
+                    }
                 }
             }
         }
