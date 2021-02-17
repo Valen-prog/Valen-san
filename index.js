@@ -47,7 +47,6 @@ client.on('message' , (message) =>
     
     let command = args[0].toLowerCase();
     console.log(command);
-
     args.shift();
     args.toString()
     console.log(args);
@@ -131,40 +130,7 @@ client.on('message' , (message) =>
                     }
                 }else{
                     serverQueue.songs.push(song);
-                    
-
-                    if(!serverQueue.connection){
-                        try{
-                            let connection = await VC.join();
-                            serverQueue.connection = connection;
-                            play(message.guild, serverQueue.songs[0]);
-                        }catch(err){
-                            console.error(err);
-                            queue.delete(message.guild.id);
-                            return message.channel.send(`I cannot connect ${err}`)
-                        }
-                    }else{
-                        let connection = await VC.join();
-                        if(serverQueue.connection != connection){
-                            serverQueue.connection = connection;
-                        }
-                        if(serverQueue.connection.dispatcher){
-                            
-                            if(!serverQueue.connection.dispatcher.playing){
-                                serverQueue.connection.dispatcher.resume();
-                                return message.channel.send(`**${serverQueue.songs[0].title}** is being played! 🤩`);
-                            }
-                        }else{
-                            try{
-                                play(message.guild, serverQueue.songs[0]);
-                                
-                            }catch(err){
-                                console.error(err);
-                                queue.delete(message.guild.id);
-                                return message.channel.send(`I cannot connect ${err}`)
-                            }
-                        }
-                    }
+                    return message.channel.send(`${song.title} has been added to queue 👍`);
                 }
             }
         }
@@ -182,38 +148,34 @@ client.on('message' , (message) =>
             .on('finish', () => {
             serverQueue.songs.shift();
             play(guild, serverQueue.songs[0])
-            if(serverQueue.connection){
-                if(serverQueue.connection.dispatcher){
-                    if(!serverQueue.connection.dispatcher.playing){
-                        serverQueue.connection.dispatcher.end();
-                        serverQueue.txtChannel.send(`**${serverQueue.songs[0].title}** is being played! 🤩`)
-                    }
-                }
-            }
-            })
             
-        
+            })
+        serverQueue.txtChannel.send(`**${serverQueue.songs[0].title}** is being played! 🤩`)
     }
 
     function stop(message, serverQueue){
-        
-
+        if(!message.member.voice.channel){
+            return message.channel.send('You need to join a voice channel first');
+        }
         if(!serverQueue){
             return message.channel.send('There is nothing playing');
         }else{
             if(serverQueue.connection){
+                if(serverQueue.connection.dispatcher.paused){
+                    serverQueue.connection.dispatcher.resume();
+                }
                 serverQueue.songs = [];
-                
-                serverQueue.connection.dispatcher.end();
-                message.channel.send('👋 Succesfully disconnected');
                 if(serverQueue.connection){
-                    serverQueue.vChannel.leave();
+                    if(serverQueue.connection.dispatcher){
+                        serverQueue.connection.dispatcher.end();
+                        return message.channel.send('👋 Succesfully disconnected');
+                    }else{
+                        return message.channel.send('No song is being played');
+                    }
                 }
             }
         }
-        if(!message.member.voice.channel){
-            return message.channel.send('You need to join a voice channel first');
-        }
+        
     }
 
     function skip (message, serverQueue){
@@ -222,19 +184,17 @@ client.on('message' , (message) =>
         }
         if(!serverQueue){
             return message.channel.send('There are no songs in queue 😔');
+        }
+        if(!serverQueue.connection){
+            message.channel.send('There are no more songs in the queue');
         }else{
-            if(!serverQueue.connection){
-                message.channel.send('There are no more songs in the queue');
+            if(serverQueue.connection.dispatcher){
+                serverQueue.connection.dispatcher.end();
+                return message.channel.send('Song skipped ✌');
             }else{
-                if(serverQueue.connection.dispatcher){
-                    serverQueue.connection.dispatcher.end();
-                    message.channel.send('Song skipped ✌');
-                }else{
-                    return message.channel.send('No song is being played');
-                }
+                return message.channel.send('No song is being played');
             }
         }
-        
     }
 
     function pause(message, serverQueue){
@@ -242,10 +202,10 @@ client.on('message' , (message) =>
             return message.channel.send('You need to join a voice channel first');
         }
         if(!serverQueue){
-            return message.channel.send('No song is being played');
+            return message.channel.send('There is nothing playing');
         }else{
             if(!serverQueue.connection){
-                return message.channel.send('No song is being played');
+                return message.channel.send('There is nothing playing');
             }else{
                 if(serverQueue.connection.dispatcher){
                     if(serverQueue.connection.dispatcher.paused){
@@ -255,10 +215,11 @@ client.on('message' , (message) =>
                         return message.channel.send('The song has been paused')
                     }
                 }else{
-                    return message.channel.send('No song is being played');
+                    return message.channel.send('There is nothing to play');
                 }
             }
         }
+        
     }
 
     function resume(message, serverQueue){
@@ -281,8 +242,10 @@ client.on('message' , (message) =>
                 }else{
                     return message.channel.send('There is nothing to play');
                 }
+                
             }
         }
+        
     }
 
     function ball(){
