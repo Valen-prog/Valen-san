@@ -79,7 +79,7 @@ client.on('message' , (message) =>
             help();
             break;
         case 'song':
-            song(message, serverQueue);
+            song(message, serverQueue, songInfo);
             break;
         default: return;
     }
@@ -235,7 +235,7 @@ client.on('message' , (message) =>
         }
     }
 
-    function song(message, serverQueue){
+    function song(message, serverQueue, songInfo){
         if(!serverQueue){
             return message.channel.send('No song is being played');
         }
@@ -243,7 +243,7 @@ client.on('message' , (message) =>
             return message.channel.send('No song is being played');
         }else{
             if(serverQueue.connection.dispatcher.playing || serverQueue.connection.dispatcher.paused){
-                return message.channel.send(`🎶🎵**SONG**🎶🎵 \n Current song: **${serverQueue.songs[0].title}** \n url: ${serverQueue.songs[0].url}`);
+                return message.channel.send(`🎶🎵**SONG**🎶🎵 \n Current song: **${songInfo.title}** \n url: ${songInfo.url}`);
             }
         }
     }
