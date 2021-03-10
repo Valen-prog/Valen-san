@@ -78,7 +78,7 @@ client.on('message' , (message) =>
             help();
             break;
         case 'cs':
-            help();
+            currentSong(serverQueue);
             break;
         default: return;
     }
