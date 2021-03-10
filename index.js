@@ -40,7 +40,7 @@ client.on('message' , (message) =>
     args[0] = '';
     args = args.join(' ').trim();
     console.log(args);
-    
+    let cs;
     /*
     let args = message.content.trim().slice(prefix.length).trim().split(" ", 20);
     console.log(args);
@@ -75,6 +75,9 @@ client.on('message' , (message) =>
             resume(message, serverQueue);
             break;
         case 'help':
+            help();
+            break;
+        case 'cs':
             help();
             break;
         default: return;
@@ -150,6 +153,7 @@ client.on('message' , (message) =>
             play(guild, serverQueue.songs[0])
             
             })
+            cs = serverQueue.songs[0].title;
         serverQueue.txtChannel.send(`**${serverQueue.songs[0].title}** is being played! 🤩`)
     }
 
@@ -172,6 +176,22 @@ client.on('message' , (message) =>
                     }else{
                         return message.channel.send('No song is being played');
                     }
+                }
+            }
+        }
+        
+    }
+
+    function currentSong(serverQueue){
+        if(!message.member.voice.channel){
+            return message.channel.send('You need to join a voice channel first');
+        }
+        if(!serverQueue){
+            return message.channel.send('There is nothing playing');
+        }else{
+            if(serverQueue.connection){
+                if(serverQueue.connection.dispatcher){
+                    return message.channel.send(`**${cs}** is being played! 🤩`);
                 }
             }
         }
@@ -308,7 +328,7 @@ client.on('message' , (message) =>
     .setTitle(`HELP`)
     .setColor(0xCF40FA)
     .setDescription(`List of commands below.`)
-    .addField(`**Commands**`, `play   - Reproduces the song specified (name or URL)\n stop   - Disconnects the bot and resets queue\n skip   - Skips to the next song in queue\n pause  - Pauses the playing song \n resume - Resumes pauses \n 8ball  - Gives answers to your questions`, true)
+    .addField(`**Commands**`, `play   - Reproduces the song specified (name or URL)\n stop   - Disconnects the bot and resets queue\n skip   - Skips to the next song in queue\n pause  - Pauses the playing song \n resume - Resumes pauses \n cs - Shows current song \n 8ball  - Gives answers to your questions`, true)
     message.channel.send({ embed: embed });
     }
 }
