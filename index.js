@@ -40,7 +40,7 @@ client.on('message' , (message) =>
     args[0] = '';
     args = args.join(' ').trim();
     console.log(args);
-    let cs;
+
     /*
     let args = message.content.trim().slice(prefix.length).trim().split(" ", 20);
     console.log(args);
@@ -153,7 +153,7 @@ client.on('message' , (message) =>
             play(guild, serverQueue.songs[0])
             
             })
-            cs = serverQueue.songs[0].title;
+            
         serverQueue.txtChannel.send(`**${serverQueue.songs[0].title}** is being played! 🤩`)
     }
 
@@ -191,7 +191,7 @@ client.on('message' , (message) =>
         }else{
             if(serverQueue.connection){
                 if(serverQueue.connection.dispatcher){
-                    return message.channel.send(`**${cs}** is being played! 🤩`);
+                    return message.channel.send(`**${serverQueue.songs[0].title}** is being played! 🤩`);
                 }
             }
         }
