@@ -271,7 +271,25 @@ client.on('message' , (message) =>
     }
     
     function quien(){
-        return message.channel.send('Vos le preguntaste?');
+        var random = randomNum(1, 7);
+        
+        
+        switch(random){
+            case 1: return message.channel.send('Vos le preguntaste?');
+                break;
+            case 2: return message.channel.send('Casi te preguntamos, crack.');
+                break;
+            case 3: message.channel.send('y decime... quién te pregunto?');
+                break;
+            case 4: message.channel.send('Buen dato. Hubiera sido genial si te lo hubieran preguntado');
+                break;
+            case 5: message.channel.send('Debo tener alzheimer porque no recuerdo que te hayan preguntado');
+                break;
+            case 6: message.channel.send('A lo mejor estoy sordo y ciego pero no sé quien te pregunto');
+                break;
+            case 7: message.channel.send('Que lastima que no lo hayamos preguntado');
+                break;
+        }
     }
 
     function ball(){
