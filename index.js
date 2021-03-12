@@ -80,6 +80,8 @@ client.on('message' , (message) =>
         case 'cs':
             currentSong(serverQueue);
             break;
+        case '?':
+            quien();
         default: return;
     }
 
@@ -266,6 +268,10 @@ client.on('message' , (message) =>
             }
         }
         
+    }
+    
+    function quien(){
+        return message.channel.send('Vos le preguntaste?');
     }
 
     function ball(){
