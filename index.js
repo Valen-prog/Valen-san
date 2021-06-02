@@ -82,6 +82,10 @@ client.on('message' , (message) =>
             break;
         case '?':
             quien();
+            break;
+        case 'profile':
+            profile(message);
+            break;
         default: return;
     }
 
@@ -343,6 +347,11 @@ client.on('message' , (message) =>
         }
     }
 
+    function profile(message){
+        image = message.attachments.first().url;
+        client.user.setAvatar(image);
+    }
+    
     function randomNum(min, max){
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
