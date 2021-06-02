@@ -348,8 +348,18 @@ client.on('message' , (message) =>
     }
 
     function profile(message){
-        image = message.attachments.first().url;
-        client.user.setAvatar(image);
+        if (message.attachments.size > 0) {
+            if (message.attachments.first(attachIsImage)){
+                image = message.attachments.first().url;
+                client.user.setAvatar(image);
+            }
+        }
+    }
+        
+    function attachIsImage(msgAttach) {
+        var url = msgAttach.url;
+        //True if this url is a png image.
+        return url.indexOf("png", url.length - "png".length /*or 3*/) !== -1;
     }
     
     function randomNum(min, max){
