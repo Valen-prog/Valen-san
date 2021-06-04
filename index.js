@@ -86,6 +86,9 @@ client.on('message' , (message) =>
         case 'profile':
             profile(message);
             break;
+        case 'nick':
+            nick(args);
+            break;
         default: return;
     }
 
@@ -365,7 +368,14 @@ client.on('message' , (message) =>
     function randomNum(min, max){
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
-
+    
+    function nick(args){
+        if(!args.length){
+            return message.channel.send('You need to enter a parameter');
+        }
+        client.user.setUsername(args);
+    }
+    
     function help(){
         const embed = new Discord.MessageEmbed()
     .setTitle(`HELP`)
