@@ -389,7 +389,7 @@ client.on('message' , (message) =>
         message.channel.send(`Wished by <@718998542030733362>, <@402521092796710915>`,{embed: frembed}).then(sentEmbed => {
     	sentEmbed.react("❤")
 	})
-        frembed = new Discord.MessageEmbed()
+        frembed
 	.setColor('#228B22')
         .setTitle(`**Miku Nakano**`)
         .setDescription(`5-toubun no Hanayome ♀️\n_Animanga roulette_ · 1009\nClaim Rank: #21\nLike Rank: #30\nNakano Miku`)
