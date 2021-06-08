@@ -89,7 +89,7 @@ client.on('message' , (message) =>
         case 'nick':
             nick(args);
             break;
-        case: 'fr':
+        case 'fr':
             fr();
             break;
         default: return;
