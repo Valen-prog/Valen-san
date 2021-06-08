@@ -381,7 +381,7 @@ client.on('message' , (message) =>
 
     function fr(){
         const frembed = new Discord.MessageEmbed()
-        .setColor('#800040')
+        .setColor('#54051f')
         .setDescription(`**Miku Nakano** \n \n5-toubun no Hanayome ♀️\n_Animanga roulette_ · 1009\nClaim Rank: #21\nLike Rank: #30\nNakano Miku`)
         .setImage(`https://images-ext-1.discordapp.net/external/IsFaoacboZNuzrKp-jrPqYrUN-KgT5EDqfBupmBpURo/https/media.discordapp.net/attachments/472313197836107780/747636059499921448/eYM3oYp.png`)
         .setFooter(`Belongs to 4Channer promedio`)
