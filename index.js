@@ -387,15 +387,15 @@ client.on('message' , (message) =>
         .setImage(`https://images-ext-1.discordapp.net/external/IsFaoacboZNuzrKp-jrPqYrUN-KgT5EDqfBupmBpURo/https/media.discordapp.net/attachments/472313197836107780/747636059499921448/eYM3oYp.png`)
         .setFooter(`Belongs to 4Channer promedio`)
         message.channel.send(`Wished by <@718998542030733362>, <@402521092796710915>`,{embed: frembed}).then(sentEmbed => {
-    sentEmbed.react("❤")
-})
-        const frembed = new Discord.MessageEmbed()
+    	sentEmbed.react("❤")
+	})
+        frembed = new Discord.MessageEmbed()
 	.setColor('#228B22')
         .setTitle(`**Miku Nakano**`)
         .setDescription(`5-toubun no Hanayome ♀️\n_Animanga roulette_ · 1009\nClaim Rank: #21\nLike Rank: #30\nNakano Miku`)
         .setImage(`https://images-ext-1.discordapp.net/external/IsFaoacboZNuzrKp-jrPqYrUN-KgT5EDqfBupmBpURo/https/media.discordapp.net/attachments/472313197836107780/747636059499921448/eYM3oYp.png`)
         .setFooter(`Belongs to 4Channer promedio`)
-    message.edit(frembed);
+    	message.edit(frembed);
     }
     
     function help(){
