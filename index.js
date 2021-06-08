@@ -382,10 +382,10 @@ client.on('message' , (message) =>
     function fr(){
         const frembed = new Discord.MessageEmbed()
         .setColor('#54051f')
-        .setDescription(`**Sylvie** \n \nTeaching Feeling ♀️\n_Game roulette_ · 76\nClaim Rank: #7152\nLike Rank: #2448`)
-        .setImage(`https://images-ext-1.discordapp.net/external/-Lp4O-TmrfS1ZKKuObop0ikApRTRKDPJNag0zUy5qhg/https/media.discordapp.net/attachments/472313197836107780/538858696227291136/5Ynhjzh.png`)
+        .setDescription(`**Worick Arcangelo** \n \nGangsta. ♂️\n_Animanga roulette_ · 69\nClaim Rank: #7782\nLike Rank: #3692\nMr. Handyman (+2)`)
+        .setImage(`https://images-ext-1.discordapp.net/external/gpL1HBnKaKjR5DmouA6bY9L8KQan643jULRn9HnF7cw/https/media.discordapp.net/attachments/472313197836107780/747271807274582026/L77M3CA.png`)
         .setFooter(`Belongs to Valen`)
-        message.channel.send(`Wished by <@587304666015203328>, <@363163453055172610>`,{embed: frembed}).then(sentEmbed => {
+        message.channel.send(`Wished by <@410587313404510216>`,{embed: frembed}).then(sentEmbed => {
     sentEmbed.react("❤")
 })
     }
