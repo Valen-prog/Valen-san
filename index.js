@@ -381,12 +381,12 @@ client.on('message' , (message) =>
 
     function fr(){
         const frembed = new Discord.MessageEmbed()
-        .setColor('#2ECC71')
-        .setTitle('**Miku Nakano**')
-        .setDescription('5-toubun no Hanayome :female:\n_Animanga roulette_ · 1009\nClaim Rank: #21\nLike Rank: #30\nNakano Miku')
-        .addImage('https://images-ext-1.discordapp.net/external/IsFaoacboZNuzrKp-jrPqYrUN-KgT5EDqfBupmBpURo/https/media.discordapp.net/attachments/472313197836107780/747636059499921448/eYM3oYp.png')
-        .setFooter('**1/30**')
-        message.channel.send('<@822854239087886346>',{embed: frembed})
+        .setColor(`#2ECC71`)
+        .setTitle(`**Miku Nakano**`)
+        .setDescription(`5-toubun no Hanayome :female:\n_Animanga roulette_ · 1009\nClaim Rank: #21\nLike Rank: #30\nNakano Miku`)
+        .addImage(`https://images-ext-1.discordapp.net/external/IsFaoacboZNuzrKp-jrPqYrUN-KgT5EDqfBupmBpURo/https/media.discordapp.net/attachments/472313197836107780/747636059499921448/eYM3oYp.png`)
+        .setFooter(`**1/30**`)
+        message.channel.send(`<@822854239087886346>`,{embed: frembed})
     }
     
     function help(){
