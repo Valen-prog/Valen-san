@@ -382,10 +382,10 @@ client.on('message' , (message) =>
     function fr(){
         const frembed = new Discord.MessageEmbed()
         .setColor('#54051f')
-        .setDescription(`**Miku Nakano** \n \n5-toubun no Hanayome ♀️\n_Animanga roulette_ · 1009\nClaim Rank: #21\nLike Rank: #30\nNakano Miku`)
-        .setImage(`https://images-ext-1.discordapp.net/external/IsFaoacboZNuzrKp-jrPqYrUN-KgT5EDqfBupmBpURo/https/media.discordapp.net/attachments/472313197836107780/747636059499921448/eYM3oYp.png`)
-        .setFooter(`Belongs to 4Channer promedio`)
-        message.channel.send(`Wished by <@718998542030733362>, <@402521092796710915>`,{embed: frembed}).then(sentEmbed => {
+        .setDescription(`**Sylvie** \n \nTeaching Feeling ♀️\n_Game roulette_ · 76\nClaim Rank: #7152\nLike Rank: #2448`)
+        .setImage(`https://images-ext-1.discordapp.net/external/-Lp4O-TmrfS1ZKKuObop0ikApRTRKDPJNag0zUy5qhg/https/media.discordapp.net/attachments/472313197836107780/538858696227291136/5Ynhjzh.png`)
+        .setFooter(`Belongs to Valen`)
+        message.channel.send(`Wished by <@587304666015203328>, <@363163453055172610>`,{embed: frembed}).then(sentEmbed => {
     sentEmbed.react("❤")
 })
     }
