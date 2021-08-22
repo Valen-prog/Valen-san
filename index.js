@@ -53,7 +53,9 @@ client.on('message' , (message) =>
     */
 
     switch(command){
-
+        case 'say':
+            message.channel.send(args)
+            break;
         case 'play':
             execute(message, serverQueue);
             break;
