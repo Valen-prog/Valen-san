@@ -384,10 +384,10 @@ client.on('message' , (message) =>
     function fr(){
         const frembed = new Discord.MessageEmbed()
         .setColor('#54051f')
-        .setDescription(`**Worick Arcangelo** \n \nGangsta. ♂️\n_Animanga roulette_ · 69\nClaim Rank: #7782\nLike Rank: #3692\nMr. Handyman (+2)`)
-        .setImage(`https://images-ext-1.discordapp.net/external/gpL1HBnKaKjR5DmouA6bY9L8KQan643jULRn9HnF7cw/https/media.discordapp.net/attachments/472313197836107780/747271807274582026/L77M3CA.png`)
-        .setFooter(`Belongs to Valen`)
-        message.channel.send(`Wished by <@410587313404510216>`,{embed: frembed}).then(sentEmbed => {
+        .setDescription(`**Lucy Mann** \n \nBen 10. ♂️\n_Animanga roulette_ · 69\nClaim Rank: #23391\nLike Rank: #30070`)
+        .setImage(`https://images-ext-1.discordapp.net/external/ioPIakmDpwNh4bBu3ylxwqYkSCIsDzIofdcL9BGN7MM/https/media.discordapp.net/attachments/472313197836107780/652405280004505600/1q8gHaW.png`)
+        .setFooter(`Belongs to Cuello a la cuarta`, `https://media.discordapp.net/attachments/689532392557248630/890031550505312286/goku.jpeg`)
+        message.channel.send(`Wished by <@439850839654268930>`,{embed: frembed}).then(sentEmbed => {
     sentEmbed.react("❤")
 })
     }
