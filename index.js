@@ -384,13 +384,21 @@ client.on('message' , (message) =>
     function fr(){
         const frembed = new Discord.MessageEmbed()
         .setColor('#54051f')
+        .setTitle("**Kl0r0t0's harem**")
+        .setAuthor(`https://media.discordapp.net/attachments/689532542889885887/916467800879554640/4818_coolpepe.png`)
+        .setDescription(`Ester\nAyano Sugiura\nValentina Glinka Estes`)
+        .setThumbnail(`https://media.discordapp.net/attachments/872026548692209738/872282842846089266/R8oqb27.png`)
+        message.channel.send(frembed)
+    }
+    
+    /*
+        .setColor('#54051f')
         .setDescription(`**Ester** \n \nBen 10. ♀️\n_Animanga roulette_ · 29\nClaim Rank: #34473\nLike Rank: #48590\nSteamy Runt (+2)`)
         .setImage(`https://media.discordapp.net/attachments/872026548692209738/872282842846089266/R8oqb27.png`)
         .setFooter("Belongs to Kl0r0t0 des-baneado de 4chan", `https://media.discordapp.net/attachments/689532542889885887/916467800879554640/4818_coolpepe.png`)
         message.channel.send(`Wished by <@439850839654268930>`,{embed: frembed}).then(sentEmbed => {
-    sentEmbed.react("❤")
-})
-    }
+    sentEmbed.react("❤")})
+*/
     
     function help(){
         const embed = new Discord.MessageEmbed()
