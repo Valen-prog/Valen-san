@@ -385,7 +385,7 @@ client.on('message' , (message) =>
         const frembed = new Discord.MessageEmbed()
         .setColor('#54051f')
         .setTitle("**Kl0r0t0's harem**")
-        .setAuthor(`https://media.discordapp.net/attachments/689532542889885887/916467800879554640/4818_coolpepe.png`)
+        .setAuthor("",'https://cdn.discordapp.com/attachments/689532542889885887/916467800879554640/4818_coolpepe.png')
         .setDescription(`Ester\nAyano Sugiura\nValentina Glinka Estes`)
         .setThumbnail(`https://media.discordapp.net/attachments/872026548692209738/872282842846089266/R8oqb27.png`)
         message.channel.send(frembed)
