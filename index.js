@@ -384,9 +384,10 @@ client.on('message' , (message) =>
     function fr(){
         const frembed = new Discord.MessageEmbed()
         .setColor('#54051f')
-        .setDescription(`**Lucy Mann** \n \nBen 10. ♂️\n_Animanga roulette_ · 69\nClaim Rank: #23391\nLike Rank: #30070`)
-        .setImage(`https://images-ext-1.discordapp.net/external/ioPIakmDpwNh4bBu3ylxwqYkSCIsDzIofdcL9BGN7MM/https/media.discordapp.net/attachments/472313197836107780/652405280004505600/1q8gHaW.png`)
-        .setFooter(`Belongs to Cuello a la cuarta`, `https://media.discordapp.net/attachments/689532392557248630/890031550505312286/goku.jpeg`)
+        .setDescription(`**Ester** \n \nBen 10. ♀️\n_Animanga roulette_ · 29\nClaim Rank: #34473\nLike Rank: #48590\nSteamy Runt (+2)`)
+        .setImage(`https://media.discordapp.net/attachments/872026548692209738/872282842846089266/R8oqb27.png`)
+        .setFooter("Belongs to Kl0r0t0 des-baneado de 4chan")
+        .setAuthor("", `https://media.discordapp.net/attachments/689532542889885887/916467800879554640/4818_coolpepe.png`)
         message.channel.send(`Wished by <@439850839654268930>`,{embed: frembed}).then(sentEmbed => {
     sentEmbed.react("❤")
 })
